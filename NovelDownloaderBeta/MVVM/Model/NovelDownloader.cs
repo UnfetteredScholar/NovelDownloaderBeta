@@ -1,5 +1,4 @@
 ﻿using System;
-using EPubFactory;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
@@ -17,23 +16,14 @@ namespace NovelDownloaderBeta.MVVM.Model
         {
             this.NovelUrl = url.Trim();
             this._novelChapters = new List<NovelChapter>();
-            this._pageTemplate = @"<!DOCTYPE html>
-	<html xmlns=""http://www.w3.org/1999/xhtml"">
-		<head>
-			<title>{0}</title>
-			<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8""/>
-			<link type=""text/css"" rel=""stylesheet"" href=""style.css""/>
-			<style type=""text/css"">
-				@page {
-					padding: 0;
-					margin: 0;
-				}
-			</style>
-		</head>
-		<body>
-			{1}
-		</body>
-	</html>".Trim().Replace("\t", "");
+            this._pageTemplate = @"<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html>
+<html xmlns=""http://www.w3.org/1999/xhtml"" xmlns:epub=""http://www.idpf.org/2007/ops"" epub:prefix=""z3998: http://www.daisy.org/z3998/2012/vocab/structure/#"" lang=""en"" xml:lang=""en"">
+  <head>
+    <title>{0}</title>
+  </head>
+  <body dir=""default"">{1}</body>
+</html>".Trim().Replace("\t", "");
             _status=Status.QUEUED;
         }
 
@@ -137,7 +127,6 @@ namespace NovelDownloaderBeta.MVVM.Model
 
         //member variables
         protected List<NovelChapter> _novelChapters;
-        protected EPubWriter _epubFile;
         protected string _pageTemplate;
         protected int _progress;
         protected Status _status;

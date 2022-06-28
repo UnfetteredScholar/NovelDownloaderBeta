@@ -104,7 +104,7 @@ namespace NovelDownloaderBeta.MVVM.Model
 
                 using (chaprerWriter= new StreamWriter(name))
                 {
-                    await chaprerWriter.WriteLineAsync(_pageTemplate.Replace("0", chapter.Title).Replace("{1}", chapterText));
+                    await chaprerWriter.WriteLineAsync(_pageTemplate.Replace("{0}", chapter.Title).Replace("{1}", chapterText));
                 }
                 
                 Progress++;
@@ -134,13 +134,14 @@ namespace NovelDownloaderBeta.MVVM.Model
 
             //cover
             epub.AddImageFile(DownloadFolder+ "\\cover.jpg", "cover.jpg");
-            epub.AddXhtmlData("page0.xhtml",_pageTemplate.Replace("{0}",NovelTitle).Replace("{1}",NovelTitle));
+            epub.AddXhtmlData("page0.xhtml",_pageTemplate.Replace("{0}","Cover").Replace("{1}", "<img src=\"cover.jpg\" alt=\"Cover\"/>"));
 
             for(int i=1; i<=Progress; i++)
             {
                 epub.AddXhtmlFile(DownloadFolder + "\\Chapters" + $"\\page{i}.xhtml", $"page{i}.xhtml");
                 epub.AddNavPoint("Chapter "+ i, $"page{i}.xhtml", i);
             }
+
 
             epub.Generate(DownloadFolder + $"\\{NovelTitle}.epub");
 
