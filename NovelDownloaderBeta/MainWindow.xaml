@@ -1,0 +1,93 @@
+﻿<Window x:Class="NovelDownloaderBeta.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NovelDownloaderBeta"        
+        xmlns:viewModel="clr-namespace:NovelDownloaderBeta.MVVM.ViewModel"
+        mc:Ignorable="d"
+        Title="NovelDownloaderBeta" 
+        Height="600" Width="920"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStyle="SingleBorderWindow"
+        DataContext="{StaticResource mainViewModel}">
+
+
+    <Border Background="#273541"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="ND Beta"
+                   Foreground="White"
+                   FontSize="22"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="10,10,0,0"/>
+
+            <StackPanel Orientation="Horizontal"
+                    Grid.Column="1">
+                <TextBox Width="600"
+                         Height="25"
+                         VerticalAlignment="Center"
+                         Margin="20,0,20,0"
+                         Style="{StaticResource TextBoxTheme}"
+                         Text="{Binding UrlTextBox}"/>
+                <Button Width="50"
+                        Height="25"
+                        Content="Add"
+                        Style="{StaticResource ButtonTheme}"
+                        Command="{Binding AddCommand}"/>
+                <Button Width="50"
+                        Height="25"
+                        Content="Start"
+                        Style="{StaticResource ButtonTheme}"
+                        Command="{Binding DownloadCommand}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Downloads"
+                             FontSize="14"
+                             Foreground="White"
+                             HorizontalAlignment="Center"
+                             Width="150"
+                             Height="50"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding OpenDownloadsView}"/>
+                <RadioButton Content="Settings"
+                             FontSize="14"
+                             Foreground="White"
+                             HorizontalAlignment="Center"
+                             Width="150"
+                             Height="50"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenSettingsView}"/>
+                <RadioButton Content="About"
+                             FontSize="14"
+                             Foreground="White"
+                             HorizontalAlignment="Center"
+                             Width="150"
+                             Height="50"
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding OpenAboutView}"/>
+
+            </StackPanel>
+
+            <ContentControl Grid.Row="1" 
+                            Grid.Column="1"
+                            Content="{Binding CurrentView}">
+    
+            </ContentControl>
+
+        </Grid>
+    </Border>
+</Window>
