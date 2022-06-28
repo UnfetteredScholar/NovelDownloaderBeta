@@ -24,6 +24,7 @@ namespace NovelDownloaderBeta.MVVM.Model
   </head>
   <body dir=""default"">{1}</body>
 </html>".Trim().Replace("\t", "");
+
             _status=Status.QUEUED;
         }
 

@@ -141,10 +141,8 @@ namespace NovelDownloaderBeta.MVVM.Model
                 epub.AddXhtmlFile(DownloadFolder + "\\Chapters" + $"\\page{i}.xhtml", $"page{i}.xhtml");
                 epub.AddNavPoint("Chapter "+ i, $"page{i}.xhtml", i);
             }
-
-
+            
             epub.Generate(DownloadFolder + $"\\{NovelTitle}.epub");
-
         }
         
         private const string _websiteUrl = "https://freewebnovel.com";
